@@ -11,6 +11,8 @@ import pandas as pd
 
 # Importing the dataset
 df = pd.read_csv('Seasons_Stats.csv')
+
+# Data Manipulation
 df["MPG"] = round(df["MP"] / df["G"], 1)
 df["PPG"] = round(df["PTS"] / df["G"], 1)
 df["RPG"] = round(df["TRB"] / df["G"], 1)
