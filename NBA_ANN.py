@@ -13,18 +13,18 @@ import pandas as pd
 df = pd.read_csv('Seasons_Stats.csv')
 
 # Data Manipulation
-df["MPG"] = round(df["MP"] / df["G"], 1)
-df["PPG"] = round(df["PTS"] / df["G"], 1)
-df["RPG"] = round(df["TRB"] / df["G"], 1)
-df["DRPG"] = round(df["DRB"] / df["G"], 1)
-df["ORPG"] = round(df["ORB"] / df["G"], 1)
-df["APG"] = round(df["AST"] / df["G"], 1)
-df["SPG"] = round(df["STL"] / df["G"], 1)
-df["BPG"] = round(df["BLK"] / df["G"], 1)
-df["TPG"] = round(df["TOV"] / df["G"], 1)
-df["PFPG"] = round(df["PF"] / df["G"], 1)
-df = df[(df["Year"] >= 1980)]
-df = df[(df["MPG"] >= 38)]
+df["MPG"] = round(df["MP"] / df["G"], 1) # Minutes Per Game
+df["PPG"] = round(df["PTS"] / df["G"], 1) # Points Per Game
+df["RPG"] = round(df["TRB"] / df["G"], 1) # Rebound Per Game
+df["DRPG"] = round(df["DRB"] / df["G"], 1) # Defensive Rebound Per Game
+df["ORPG"] = round(df["ORB"] / df["G"], 1) # Offensive Rebound Per Game
+df["APG"] = round(df["AST"] / df["G"], 1) # Assists Per Game
+df["SPG"] = round(df["STL"] / df["G"], 1) # Steals Per Game
+df["BPG"] = round(df["BLK"] / df["G"], 1) # Blocks Per Game
+df["TPG"] = round(df["TOV"] / df["G"], 1) # Turnovers Per Game
+df["PFPG"] = round(df["PF"] / df["G"], 1) # Personal Fouls Per Game
+df = df[(df["Year"] >= 1980)] # Before 1980 we had a lot of missing values in our data
+df = df[(df["MPG"] >= 38)] # Increasing the minutes per game can maybe help to improve the accuracy
 df = df[["Pos", "MPG", "PPG", "RPG", "DRPG", "ORPG", "APG", "SPG", "BPG", "TPG", "PFPG"]]
 X = df.iloc[:, :11].values
 y = df.iloc[:, :1].values
