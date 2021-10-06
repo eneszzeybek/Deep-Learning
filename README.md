@@ -1,4 +1,4 @@
-Cancer_ANN -> Using Binary Classification of Breast Cancer Cases with Articial Neural Networks
+Cancer_ANN : Using Binary Classification of Breast Cancer Cases with Articial Neural Networks
 
 Data Source: https://archive.ics.uci.edu/ml/machine-learning-databases/breast-cancer-wisconsin/ 
 
