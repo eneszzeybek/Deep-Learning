@@ -6,6 +6,6 @@ In conclusion we have used ANN method to perform binary classification of breast
 
 NBA_ANN : Using Players Stats to Know Which Position They're Playing
 
-Positions : PG - SG - SF - PF - C
-
 Data Source : https://www.kaggle.com/drgilermo/nba-players-stats
+
+In conclusion we have used ANN method to perform multi-class classification of NBA players positions into pg-sg-sf-pf-c categories. We have provided ANN model with the mean accuracy value of ~ 0.73 upon tuning.
