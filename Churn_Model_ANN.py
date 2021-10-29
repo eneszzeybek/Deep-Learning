@@ -47,9 +47,9 @@ X_test = sc.transform(x_test)
 
 # Importing the Keras libraries and packages
 import keras
-from keras.models import Sequential
-from keras.layers import Dense
-from keras.layers import Dropout
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import Dense
+from tensorflow.keras.layers import Dropout
 
 # Initialising the ANN
 classifier = Sequential()
@@ -88,10 +88,10 @@ cm = confusion_matrix(y_test, y_pred)
 # Part 4 - Evaluating, Improving and Tuning the ANN
 
 # Evaluating the ANN
-from keras.wrappers.scikit_learn import KerasClassifier
+from tensorflow.keras.wrappers.scikit_learn import KerasClassifier
 from sklearn.model_selection import cross_val_score
-from keras.models import Sequential
-from keras.layers import Dense
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import Dense
 def build_classifier():
     classifier = Sequential()
     classifier.add(Dense(units = 7, kernel_initializer = 'uniform', activation = 'relu', input_dim = 12))
@@ -108,10 +108,10 @@ variance = accuracies.std()
 # Dropout Regularization to reduce overfitting if needed
 
 # Tuning the ANN
-from keras.wrappers.scikit_learn import KerasClassifier
+from tensorflow.keras.wrappers.scikit_learn import KerasClassifier
 from sklearn.model_selection import GridSearchCV
-from keras.models import Sequential
-from keras.layers import Dense
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import Dense
 def build_classifier(optimizer):
     classifier = Sequential()
     classifier.add(Dense(units = 7, kernel_initializer = 'uniform', activation = 'relu', input_dim = 12))
