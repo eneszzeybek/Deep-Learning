@@ -34,17 +34,17 @@ X_test = sc.transform(X_test)
 
 # Importing the Keras libraries and packages
 import keras
-from keras.models import Sequential
-from keras.layers import Dense
-from keras.layers import Dropout
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import Dense
+from tensorflow.keras.layers import Dropout
 
 # Initialising the ANN
 classifier = Sequential()
 
 # Adding the input layer and the first hidden layer
-classifier.add(Dense(units = 6, kernel_initializer = 'uniform', activation = 'relu', input_dim = 30))
+classifier.add(Dense(units = 16, kernel_initializer = 'uniform', activation = 'relu', input_dim = 30))
 # Adding the second hidden layer
-classifier.add(Dense(units = 6, kernel_initializer = 'uniform', activation = 'relu'))
+classifier.add(Dense(units = 16, kernel_initializer = 'uniform', activation = 'relu'))
 
 # Adding the output layer
 classifier.add(Dense(units = 1, kernel_initializer = 'uniform', activation = 'sigmoid'))
@@ -74,10 +74,10 @@ cm = confusion_matrix(y_test, y_pred)
 # Part 4 - Evaluating, Improving and Tuning the ANN
 
 # Evaluating the ANN
-from keras.wrappers.scikit_learn import KerasClassifier
+from tensorflow.keras.wrappers.scikit_learn import KerasClassifier
 from sklearn.model_selection import cross_val_score
-from keras.models import Sequential
-from keras.layers import Dense
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import Dense
 def build_classifier():
     classifier = Sequential()
     classifier.add(Dense(units = 6, kernel_initializer = 'uniform', activation = 'relu', input_dim = 30))
@@ -94,10 +94,10 @@ variance = accuracies.std()
 # Dropout Regularization to reduce overfitting if needed
 
 # Tuning the ANN
-from keras.wrappers.scikit_learn import KerasClassifier
+from tensorflow.keras.wrappers.scikit_learn import KerasClassifier
 from sklearn.model_selection import GridSearchCV
-from keras.models import Sequential
-from keras.layers import Dense
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import Dense
 def build_classifier(optimizer):
     classifier = Sequential()
     classifier.add(Dense(units = 6, kernel_initializer = 'uniform', activation = 'relu', input_dim = 30))
