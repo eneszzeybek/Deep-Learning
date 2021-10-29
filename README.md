@@ -14,4 +14,4 @@ In conclusion we have used ANN method to perform multi-class classification of p
 
 Data Source : https://www.kaggle.com/shrutimechlearn/churn-modelling
 
-In conclusion we have used ANN method to perform binary classification of customers for leaving the bank or not. We have provided ANN model with the best accuracy value of ~ 0.85 upon tuning.
+In conclusion we have used ANN method to perform binary classification of customers for leaving the bank or not. We have provided ANN model with the best accuracy value of ~ 0.85 upon tuning..
