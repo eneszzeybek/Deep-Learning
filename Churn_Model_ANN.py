@@ -55,11 +55,11 @@ from keras.layers import Dropout
 classifier = Sequential()
 
 # Adding the input layer and the first hidden layer
-classifier.add(Dense(units = 6, kernel_initializer = 'uniform', activation = 'relu', input_dim = 12))
+classifier.add(Dense(units = 7, kernel_initializer = 'uniform', activation = 'relu', input_dim = 12))
 # classifier.add(Dropout(p = 0.1))
 
 # Adding the second hidden layer
-classifier.add(Dense(units = 6, kernel_initializer = 'uniform', activation = 'relu'))
+classifier.add(Dense(units = 7, kernel_initializer = 'uniform', activation = 'relu'))
 # classifier.add(Dropout(p = 0.1))
 
 # Adding the output layer
@@ -94,8 +94,8 @@ from keras.models import Sequential
 from keras.layers import Dense
 def build_classifier():
     classifier = Sequential()
-    classifier.add(Dense(units = 6, kernel_initializer = 'uniform', activation = 'relu', input_dim = 12))
-    classifier.add(Dense(units = 6, kernel_initializer = 'uniform', activation = 'relu'))
+    classifier.add(Dense(units = 7, kernel_initializer = 'uniform', activation = 'relu', input_dim = 12))
+    classifier.add(Dense(units = 7, kernel_initializer = 'uniform', activation = 'relu'))
     classifier.add(Dense(units = 1, kernel_initializer = 'uniform', activation = 'sigmoid'))
     classifier.compile(optimizer = 'adam', loss = 'binary_crossentropy', metrics = ['accuracy'])
     return classifier
@@ -114,8 +114,8 @@ from keras.models import Sequential
 from keras.layers import Dense
 def build_classifier(optimizer):
     classifier = Sequential()
-    classifier.add(Dense(units = 6, kernel_initializer = 'uniform', activation = 'relu', input_dim = 12))
-    classifier.add(Dense(units = 6, kernel_initializer = 'uniform', activation = 'relu'))
+    classifier.add(Dense(units = 7, kernel_initializer = 'uniform', activation = 'relu', input_dim = 12))
+    classifier.add(Dense(units = 7, kernel_initializer = 'uniform', activation = 'relu'))
     classifier.add(Dense(units = 1, kernel_initializer = 'uniform', activation = 'sigmoid'))
     classifier.compile(optimizer = optimizer, loss = 'binary_crossentropy', metrics = ['accuracy'])
     return classifier
