@@ -12,10 +12,17 @@ import pandas as pd
 # Importing the dataset
 df = pd.read_csv('Seasons_Stats.csv')
 
+"""
+PG : 0 0 1 0 0
+SG : 0 0 0 0 1
+SF : 0 0 0 1 0
+PF : 0 1 0 0 0
+ C : 1 0 0 0 0
+"""
+
 # Data Manipulation
 df["MPG"] = round(df["MP"] / df["G"], 1) # Minutes Per Game
 df["PPG"] = round(df["PTS"] / df["G"], 1) # Points Per Game
-df["RPG"] = round(df["TRB"] / df["G"], 1) # Total Rebounds Per Game
 df["DRPG"] = round(df["DRB"] / df["G"], 1) # Defensive Rebounds Per Game
 df["ORPG"] = round(df["ORB"] / df["G"], 1) # Offensive Rebounds Per Game
 df["APG"] = round(df["AST"] / df["G"], 1) # Assists Per Game
@@ -23,9 +30,22 @@ df["SPG"] = round(df["STL"] / df["G"], 1) # Steals Per Game
 df["BPG"] = round(df["BLK"] / df["G"], 1) # Blocks Per Game
 df["TPG"] = round(df["TOV"] / df["G"], 1) # Turnovers Per Game
 df["PFPG"] = round(df["PF"] / df["G"], 1) # Personal Fouls Per Game
-df = df[(df["Year"] >= 1980)] # Before 1980 we had a lot of missing values in our data
-df = df[["Pos", "MPG", "PPG", "RPG", "DRPG", "ORPG", "APG", "SPG", "BPG", "TPG", "PFPG"]]
-X = df.iloc[:, :11].values
+df["2P"] = round(df["2P"] / df["G"], 1) # 2-Point Field Goals Per Game
+df["2PA"] = round(df["2PA"] / df["G"], 1) # 2-Point Field Goal Attempts Per Game
+df["FT"] = round(df["FT"] / df["G"], 1) # Free Throws Per Game
+df["FTA"] = round(df["FTA"] / df["G"], 1) # Free Throw Attempts Per Game
+
+# Player must play 70% of his team's games
+df1 = df[(df["Year"] >= 1980) & (df["Year"] <= 1998) & (df["G"] >= 58)]
+df2 = df[(df["Year"] == 1999) & (df["G"] >= 35)]
+df3 = df[(df["Year"] >= 2000) & (df["Year"] <= 2011) & (df["G"] >= 58)]
+df4 = df[(df["Year"] == 2012) & (df["G"] >= 47)]
+df5 = df[(df["Year"] >= 2013) & (df["G"] >= 58)]
+
+df = pd.concat((df1, df2, df3, df4, df5), axis = 0)
+df = df[["Pos", "MPG", "PPG", "DRPG", "ORPG", "APG", "SPG", "BPG", "TPG", "PFPG", "2P", "2PA", "FT", "FTA"]]
+correlation = df.corr()
+X = df.iloc[:, :14].values
 y = df.iloc[:, :1].values
 
 # Encoding categorical data
@@ -60,10 +80,10 @@ from tensorflow.keras.layers import Dropout
 classifier = Sequential()
 
 # Adding the input layer and the first hidden layer
-classifier.add(Dense(units = 8, kernel_initializer = 'uniform', activation = 'relu', input_dim = 10))
+classifier.add(Dense(units = 9, kernel_initializer = 'uniform', activation = 'relu', input_dim = 13))
 
 # Adding the second hidden layer
-classifier.add(Dense(units = 8, kernel_initializer = 'uniform', activation = 'relu'))
+classifier.add(Dense(units = 9, kernel_initializer = 'uniform', activation = 'relu'))
 
 # Adding the output layer
 classifier.add(Dense(units = 5, kernel_initializer = 'uniform', activation = 'sigmoid'))
@@ -81,7 +101,7 @@ y_pred = classifier.predict(X_test)
 y_pred = (y_pred > 0.5)
 
 # Predicting a single new observation
-new_prediction = classifier.predict(sc.transform(np.array([[39, 31, 4, 3.6, 0.4, 5, 2.5, 1, 3, 1.5]])))
+new_prediction = classifier.predict(sc.transform(np.array([[36.9, 28, 6.8, 1.4, 4.1, 2.2, 0.4, 2.7, 2.8, 5.4, 11.1, 5.9, 7.0]])))
 new_prediction = (new_prediction > 0.5)
 
 # Making the Confusion Matrix
@@ -97,8 +117,8 @@ from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense
 def build_classifier():
     classifier = Sequential()
-    classifier.add(Dense(units = 8, kernel_initializer = 'uniform', activation = 'relu', input_dim = 10))
-    classifier.add(Dense(units = 8, kernel_initializer = 'uniform', activation = 'relu'))
+    classifier.add(Dense(units = 9, kernel_initializer = 'uniform', activation = 'relu', input_dim = 13))
+    classifier.add(Dense(units = 9, kernel_initializer = 'uniform', activation = 'relu'))
     classifier.add(Dense(units = 5, kernel_initializer = 'uniform', activation = 'sigmoid'))
     classifier.compile(optimizer = 'adam', loss = 'categorical_crossentropy', metrics = ['accuracy'])
     return classifier
@@ -117,8 +137,8 @@ from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense
 def build_classifier(optimizer):
     classifier = Sequential()
-    classifier.add(Dense(units = 8, kernel_initializer = 'uniform', activation = 'relu', input_dim = 10))
-    classifier.add(Dense(units = 8, kernel_initializer = 'uniform', activation = 'relu'))
+    classifier.add(Dense(units = 9, kernel_initializer = 'uniform', activation = 'relu', input_dim = 13))
+    classifier.add(Dense(units = 9, kernel_initializer = 'uniform', activation = 'relu'))
     classifier.add(Dense(units = 5, kernel_initializer = 'uniform', activation = 'sigmoid'))
     classifier.compile(optimizer = optimizer, loss = 'categorical_crossentropy', metrics = ['accuracy'])
     return classifier
