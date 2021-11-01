@@ -36,16 +36,17 @@ df["FT"] = round(df["FT"] / df["G"], 1) # Free Throws Per Game
 df["FTA"] = round(df["FTA"] / df["G"], 1) # Free Throw Attempts Per Game
 
 # Player must play 70% of his team's games
-df1 = df[(df["Year"] >= 1980) & (df["Year"] <= 1998) & (df["G"] >= 58)]
+df1 = df[(df["Year"] >= 1978) & (df["Year"] <= 1998) & (df["G"] >= 58)]
 df2 = df[(df["Year"] == 1999) & (df["G"] >= 35)]
 df3 = df[(df["Year"] >= 2000) & (df["Year"] <= 2011) & (df["G"] >= 58)]
 df4 = df[(df["Year"] == 2012) & (df["G"] >= 47)]
 df5 = df[(df["Year"] >= 2013) & (df["G"] >= 58)]
 
 df = pd.concat((df1, df2, df3, df4, df5), axis = 0)
-df = df[["Pos", "MPG", "PPG", "DRPG", "ORPG", "APG", "SPG", "BPG", "TPG", "PFPG", "2P", "2PA", "FT", "FTA"]]
+df = df[["Pos", "PER", "TS%", "FTr", "ORB%", "DRB%", "TRB%", "AST%", "STL%", "BLK%", "TOV%", "USG%", "OWS", "DWS", "OBPM", "DBPM", "VORP","G", "MPG", "PPG", "DRPG", "ORPG", "APG", "SPG", "BPG", "TPG", "PFPG", "2P", "2PA", "eFG%", "FT", "FTA"]]
+null = df.isnull()
 correlation = df.corr()
-X = df.iloc[:, :14].values
+x = df.iloc[:, :32].values
 y = df.iloc[:, :1].values
 
 # Encoding categorical data
@@ -54,19 +55,19 @@ from sklearn.compose import ColumnTransformer
 ec = df.iloc[:, :1]
 ct = ColumnTransformer([('encoder', OneHotEncoder(), [0])], remainder='passthrough')
 ec = ct.fit_transform(ec)
-X = np.array(ct.fit_transform(X), dtype=np.float)
-y = X[:, :5]
-X = X[:, 5:]
+x = np.array(ct.fit_transform(x), dtype=np.float)
+y = x[:, :5]
+x = x[:, 5:]
 
 # Splitting the dataset into the Training set and Test set
 from sklearn.model_selection import train_test_split
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.2, random_state = 0)
+x_train, x_test, y_train, y_test = train_test_split(x, y, test_size = 0.2, random_state = 0)
 
 # Feature Scaling
 from sklearn.preprocessing import StandardScaler
 sc = StandardScaler()
-X_train = sc.fit_transform(X_train)
-X_test = sc.transform(X_test)
+X_train = sc.fit_transform(x_train)
+X_test = sc.transform(x_test)
 
 # Part 2 - Now let's make the ANN!
 
@@ -80,10 +81,10 @@ from tensorflow.keras.layers import Dropout
 classifier = Sequential()
 
 # Adding the input layer and the first hidden layer
-classifier.add(Dense(units = 9, kernel_initializer = 'uniform', activation = 'relu', input_dim = 13))
+classifier.add(Dense(units = 18, kernel_initializer = 'uniform', activation = 'relu', input_dim = 31))
 
 # Adding the second hidden layer
-classifier.add(Dense(units = 9, kernel_initializer = 'uniform', activation = 'relu'))
+classifier.add(Dense(units = 18, kernel_initializer = 'uniform', activation = 'relu'))
 
 # Adding the output layer
 classifier.add(Dense(units = 5, kernel_initializer = 'uniform', activation = 'sigmoid'))
@@ -101,8 +102,8 @@ y_pred = classifier.predict(X_test)
 y_pred = (y_pred > 0.5)
 
 # Predicting a single new observation
-new_prediction = classifier.predict(sc.transform(np.array([[36.9, 28, 6.8, 1.4, 4.1, 2.2, 0.4, 2.7, 2.8, 5.4, 11.1, 5.9, 7.0]])))
-new_prediction = (new_prediction > 0.5)
+# new_prediction = classifier.predict(sc.transform(np.array([[]])))
+# new_prediction = (new_prediction > 0.5)
 
 # Making the Confusion Matrix
 from sklearn.metrics import confusion_matrix
@@ -117,8 +118,8 @@ from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense
 def build_classifier():
     classifier = Sequential()
-    classifier.add(Dense(units = 9, kernel_initializer = 'uniform', activation = 'relu', input_dim = 13))
-    classifier.add(Dense(units = 9, kernel_initializer = 'uniform', activation = 'relu'))
+    classifier.add(Dense(units = 18, kernel_initializer = 'uniform', activation = 'relu', input_dim = 31))
+    classifier.add(Dense(units = 18, kernel_initializer = 'uniform', activation = 'relu'))
     classifier.add(Dense(units = 5, kernel_initializer = 'uniform', activation = 'sigmoid'))
     classifier.compile(optimizer = 'adam', loss = 'categorical_crossentropy', metrics = ['accuracy'])
     return classifier
@@ -137,8 +138,8 @@ from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense
 def build_classifier(optimizer):
     classifier = Sequential()
-    classifier.add(Dense(units = 9, kernel_initializer = 'uniform', activation = 'relu', input_dim = 13))
-    classifier.add(Dense(units = 9, kernel_initializer = 'uniform', activation = 'relu'))
+    classifier.add(Dense(units = 18, kernel_initializer = 'uniform', activation = 'relu', input_dim = 31))
+    classifier.add(Dense(units = 18, kernel_initializer = 'uniform', activation = 'relu'))
     classifier.add(Dense(units = 5, kernel_initializer = 'uniform', activation = 'sigmoid'))
     classifier.compile(optimizer = optimizer, loss = 'categorical_crossentropy', metrics = ['accuracy'])
     return classifier
