@@ -8,7 +8,7 @@ In conclusion we have used ANN method to perform binary classification of breast
 
 Data Source : https://www.kaggle.com/drgilermo/nba-players-stats
 
-In conclusion we have used ANN method to perform multi-class classification of players positions into PG-SG-SF-PF-C categories. We have provided ANN model with the best accuracy value of ~ 0.66 upon tuning.
+In conclusion we have used ANN method to perform multi-class classification of players positions into PG-SG-SF-PF-C categories. We have provided ANN model with the best accuracy value of ~ 0.69 upon tuning.
 
 3) Churn_Model_ANN : Using our ANN model to predict if the customer will leave the bank or not.
 
