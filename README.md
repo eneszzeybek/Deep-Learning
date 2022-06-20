@@ -14,4 +14,4 @@ I have used the ANN method to perform a multi-class classification of players' p
 
 Data Source : https://www.kaggle.com/shrutimechlearn/churn-modelling
 
-I have used the ANN method to perform binary classification of customers leaving the bank or not. I have provided the ANN model with the best accuracy value of ~ 0.85 upon tuning.
+I have used the ANN method to perform binary classification of customers leaving the bank or not. I have provided the ANN model with the best accuracy value of ~ 0.85 upon tuning.s
