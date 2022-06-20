@@ -2,7 +2,7 @@
 
 Data Source: https://archive.ics.uci.edu/ml/machine-learning-databases/breast-cancer-wisconsin/ 
 
-In conclusion we have used ANN method to perform binary classification of breast cancer cases into benign or malignant categories. We have provided ANN model with the best accuracy value of ~ 0.97 upon tuning.
+I have used ANN method to perform binary classification of breast cancer cases into benign or malignant categories. We have provided ANN model with the best accuracy value of ~ 0.97 upon tuning.
 
 2) NBA_ANN : Using Players Stats to Learn Which Position They're Playing
 
