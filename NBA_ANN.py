@@ -87,7 +87,7 @@ classifier.add(Dense(units = 18, kernel_initializer = 'uniform', activation = 'r
 classifier.add(Dense(units = 18, kernel_initializer = 'uniform', activation = 'relu'))
 
 # Adding the output layer
-classifier.add(Dense(units = 5, kernel_initializer = 'uniform', activation = 'sigmoid'))
+classifier.add(Dense(units = 5, kernel_initializer = 'uniform', activation = 'softmax'))
 
 # Compiling the ANN
 classifier.compile(optimizer = 'adam', loss = 'categorical_crossentropy', metrics = ['accuracy'])
@@ -120,7 +120,7 @@ def build_classifier():
     classifier = Sequential()
     classifier.add(Dense(units = 18, kernel_initializer = 'uniform', activation = 'relu', input_dim = 31))
     classifier.add(Dense(units = 18, kernel_initializer = 'uniform', activation = 'relu'))
-    classifier.add(Dense(units = 5, kernel_initializer = 'uniform', activation = 'sigmoid'))
+    classifier.add(Dense(units = 5, kernel_initializer = 'uniform', activation = 'softmax'))
     classifier.compile(optimizer = 'adam', loss = 'categorical_crossentropy', metrics = ['accuracy'])
     return classifier
 classifier = KerasClassifier(build_fn = build_classifier, batch_size = 10, epochs = 100)
@@ -140,7 +140,7 @@ def build_classifier(optimizer):
     classifier = Sequential()
     classifier.add(Dense(units = 18, kernel_initializer = 'uniform', activation = 'relu', input_dim = 31))
     classifier.add(Dense(units = 18, kernel_initializer = 'uniform', activation = 'relu'))
-    classifier.add(Dense(units = 5, kernel_initializer = 'uniform', activation = 'sigmoid'))
+    classifier.add(Dense(units = 5, kernel_initializer = 'uniform', activation = 'softmax'))
     classifier.compile(optimizer = optimizer, loss = 'categorical_crossentropy', metrics = ['accuracy'])
     return classifier
 classifier = KerasClassifier(build_fn = build_classifier)
