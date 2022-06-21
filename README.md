@@ -4,7 +4,7 @@
 
 I have used the ANN method to perform binary classification of breast cancer cases into benign or malignant categories. I have provided the ANN model with the best accuracy value of ~ 0.97 upon tuning.
 
-**2 - NBA_ANN:** Using Players' Stats to Learn Which Position They're Playing
+**2 - NBA_ANN:** Using Players' Stats to Predict Which Position They're Playing
 
 **Data Source:** https://www.kaggle.com/drgilermo/nba-players-stats
 
